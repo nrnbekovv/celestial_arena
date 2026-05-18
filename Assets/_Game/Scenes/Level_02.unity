@@ -358,6 +358,7 @@ MonoBehaviour:
   highScoreText: {fileID: 354100091}
   winPanel: {fileID: 1380748614}
   losePanel: {fileID: 882822512}
+  isFinalLevel: 1
   wavesToWin: 10
   nextLevelName: Level_02
 --- !u!4 &184141796
@@ -1313,7 +1314,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: LEVEL COMPLETE!
+  m_text: YOU WIN!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
@@ -1676,7 +1677,7 @@ GameObject:
   - component: {fileID: 657022770}
   - component: {fileID: 657022769}
   m_Layer: 5
-  m_Name: NextLevelButton
+  m_Name: MenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2954,7 +2955,7 @@ GameObject:
   - component: {fileID: 2003131305}
   - component: {fileID: 2003131304}
   m_Layer: 5
-  m_Name: ' NextLevelText'
+  m_Name: MenuText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2999,7 +3000,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Next Level
+  m_text: Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
   m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
