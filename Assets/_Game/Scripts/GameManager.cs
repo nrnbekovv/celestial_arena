@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI highScoreText;
     public GameObject winPanel;
     public GameObject losePanel;
+    public bool isFinalLevel = false;
 
     [Header("Game Settings")]
     public int wavesToWin = 100;
@@ -85,7 +86,15 @@ public class GameManager : MonoBehaviour
     public void LoadNextLevel()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(nextLevelName);
+
+        if (isFinalLevel)
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+        else
+        {
+            SceneManager.LoadScene(nextLevelName);
+        }
     }
 
     public void LoadMainMenu()
