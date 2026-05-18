@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class DeathZone : MonoBehaviour
 {
@@ -7,7 +6,10 @@ public class DeathZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.Lose();
+            }
         }
     }
 }
