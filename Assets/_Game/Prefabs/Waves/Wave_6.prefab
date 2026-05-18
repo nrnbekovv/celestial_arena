@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6564406344897145778}
   - component: {fileID: 1632296713433702232}
   - component: {fileID: -8867377460823973725}
+  - component: {fileID: -6048859802286117615}
   m_Layer: 0
   m_Name: Wave_6
   m_TagString: Wave
@@ -92,6 +93,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-6048859802286117615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2405721065034872773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46613b54ffcdc49e0ac90094a75b9671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveScore
+  wasCounted: 0
 --- !u!1001 &476040224393126926
 PrefabInstance:
   m_ObjectHideFlags: 0

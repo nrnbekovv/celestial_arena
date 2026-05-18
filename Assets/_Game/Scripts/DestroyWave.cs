@@ -12,7 +12,7 @@ public class DestroyWave : MonoBehaviour
         WaveScore waveScore = root.GetComponent<WaveScore>();
 
         if (waveScore == null)
-            waveScore = root.gameObject.AddComponent<WaveScore>();
+            return;
 
         if (waveScore.wasCounted)
             return;
@@ -20,7 +20,9 @@ public class DestroyWave : MonoBehaviour
         waveScore.wasCounted = true;
 
         if (GameManager.Instance != null)
+        {
             GameManager.Instance.AddScore();
+        }
 
         Destroy(root.gameObject);
     }
