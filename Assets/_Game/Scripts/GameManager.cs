@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     private int score = 0;
     private bool gameEnded = false;
+    public float waveSpeed = 5f;
 
     void Awake()
     {

@@ -361,6 +361,7 @@ MonoBehaviour:
   isFinalLevel: 1
   wavesToWin: 10
   nextLevelName: Level_02
+  waveSpeed: 7
 --- !u!4 &184141796
 Transform:
   m_ObjectHideFlags: 0
@@ -587,7 +588,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 2
 --- !u!114 &353677165
 MonoBehaviour:
@@ -620,7 +621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b64b1b3447805c4e940b99714d9375d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStun
-  stunDuration: 1
+  stunDuration: 1.5
   pushForce: 5
   upwardForce: 3
 --- !u!1 &354100089
@@ -2668,7 +2669,7 @@ MonoBehaviour:
   - {fileID: 1092311547924792116, guid: 1915f305eeab52e468364717576bc288, type: 3}
   - {fileID: 1116860610195076715, guid: 3a444017dde53a840a80be22c9c7ba61, type: 3}
   spawnPoint: {fileID: 1375535632}
-  spawnInterval: 4
+  spawnInterval: 3.5
 --- !u!4 &1505812067
 Transform:
   m_ObjectHideFlags: 0

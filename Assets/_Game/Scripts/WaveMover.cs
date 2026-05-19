@@ -9,6 +9,12 @@ public class WaveMover : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        // Берем скорость из LevelManager/GameManager
+        if (GameManager.Instance != null)
+        {
+            moveSpeed = GameManager.Instance.waveSpeed;
+        }
     }
 
     void FixedUpdate()
