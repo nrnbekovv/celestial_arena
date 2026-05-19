@@ -2531,7 +2531,7 @@ MonoBehaviour:
   - {fileID: 1092311547924792116, guid: 1915f305eeab52e468364717576bc288, type: 3}
   - {fileID: 1116860610195076715, guid: 3a444017dde53a840a80be22c9c7ba61, type: 3}
   spawnPoint: {fileID: 1375535632}
-  spawnInterval: 3
+  spawnInterval: 4
 --- !u!4 &1505812067
 Transform:
   m_ObjectHideFlags: 0
