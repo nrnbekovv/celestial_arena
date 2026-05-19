@@ -19,10 +19,6 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 moveDirection;
     private bool isStunned = false;
-
-    // 0 = не прыгал
-    // 1 = обычный jump
-    // 2 = spin jump использован
     private int jumpCount = 0;
 
     void Start()
@@ -44,14 +40,12 @@ public class PlayerMovement : MonoBehaviour
         moveDirection =
             new Vector3(moveH, 0, moveV).normalized;
 
-        // Проверка земли
         isGrounded = Physics.CheckSphere(
             transform.position,
             groundCheckRadius,
             groundLayer
         );
 
-        // Сброс прыжка при приземлении
         if (isGrounded && !wasGrounded)
         {
             jumpCount = 0;
@@ -59,16 +53,13 @@ public class PlayerMovement : MonoBehaviour
 
         wasGrounded = isGrounded;
 
-        // Прыжок
         if (Input.GetButtonDown("Jump"))
         {
-            // Первый прыжок
             if (jumpCount == 0)
             {
                 PerformJump(false);
                 jumpCount = 1;
             }
-            // Второй прыжок
             else if (jumpCount == 1)
             {
                 PerformJump(true);
@@ -83,34 +74,32 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void FixedUpdate()
-{
-    if (isStunned)
-        return;
-
-    Vector3 movement =
-        moveDirection * speed * Time.fixedDeltaTime;
-
-    rb.MovePosition(
-        rb.position + movement
-    );
-
-    // Поворот персонажа
-    if (moveDirection.magnitude > 0.1f)
     {
-        Quaternion targetRotation =
-            Quaternion.LookRotation(moveDirection);
+        if (isStunned)
+            return;
 
-        transform.rotation = Quaternion.Slerp(
-            transform.rotation,
-            targetRotation,
-            0.2f
+        Vector3 movement =
+            moveDirection * speed * Time.fixedDeltaTime;
+
+        rb.MovePosition(
+            rb.position + movement
         );
+
+        if (moveDirection.magnitude > 0.1f)
+        {
+            Quaternion targetRotation =
+                Quaternion.LookRotation(moveDirection);
+
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                targetRotation,
+                0.2f
+            );
+        }
     }
-}
 
     void PerformJump(bool spinJump)
     {
-        // Сброс вертикальной скорости
         rb.linearVelocity = new Vector3(
             rb.linearVelocity.x,
             0,
@@ -122,7 +111,6 @@ public class PlayerMovement : MonoBehaviour
             ForceMode.Impulse
         );
 
-        // Анимации
         if (spinJump)
         {
             anim.SetTrigger("JumpSpin");
@@ -135,14 +123,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Ground
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            jumpCount = 0;
-        }
-
-        // Любой блок
-        if (collision.gameObject.CompareTag("Obstacle"))
+        if (
+            collision.gameObject.CompareTag("Ground") ||
+            collision.gameObject.CompareTag("Obstacle") ||
+            collision.gameObject.CompareTag("Trap")
+        )
         {
             jumpCount = 0;
         }
@@ -169,7 +154,6 @@ public class PlayerMovement : MonoBehaviour
     {
         isStunned = true;
 
-        // Анимация
         anim.SetTrigger("Dizzy");
 
         yield return new WaitForSeconds(duration);

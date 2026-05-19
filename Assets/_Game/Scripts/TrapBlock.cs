@@ -15,21 +15,18 @@ public class TrapBlock : MonoBehaviour
 
             if (playerRb != null)
             {
-                // Направление от блока к игроку
                 Vector3 direction =
                     (collision.transform.position - transform.position)
                     .normalized;
 
                 direction.y = 0.5f;
 
-                // Отталкивание
                 playerRb.AddForce(
                     direction * knockbackForce,
                     ForceMode.Impulse
                 );
             }
 
-            // Оглушение
             PlayerMovement player =
                 collision.gameObject.GetComponent<PlayerMovement>();
 

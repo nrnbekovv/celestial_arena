@@ -20,62 +20,75 @@ public class PlayerStun : MonoBehaviour
         anim = GetComponent<Animator>();
         movement = GetComponent<PlayerMovement>();
     }
-    
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("HIT: " + collision.gameObject.name);
-        // Если коснулись Trap Block
-        if (
-            collision.gameObject.CompareTag("Trap")
-            && !isStunned
-            
-        )
+        if (isStunned)
+            return;
+
+        if (!IsTrap(collision))
+            return;
+
+        Debug.Log("TRAP HIT");
+
+        Vector3 pushDirection = Vector3.zero;
+
+        if (collision.contactCount > 0)
         {
-            Debug.Log("TRAP HIT");
-            // Направление отталкивания
-            Vector3 pushDirection =
-                (transform.position -
-                collision.transform.position).normalized;
-
-            pushDirection.y = 0;
-
-            // Сброс скорости
-            rb.linearVelocity = Vector3.zero;
-
-            // Отталкивание
-            rb.AddForce(
-                pushDirection * pushForce +
-                Vector3.up * upwardForce,
-                ForceMode.Impulse
-            );
-
-            // Оглушение
-            StartCoroutine(StunCoroutine());
+            pushDirection = collision.contacts[0].normal;
         }
+        else
+        {
+            pushDirection = (transform.position - collision.transform.position).normalized;
+        }
+
+        pushDirection.y = 0;
+        pushDirection.Normalize();
+
+        rb.linearVelocity = Vector3.zero;
+
+        rb.AddForce(
+            pushDirection * pushForce + Vector3.up * upwardForce,
+            ForceMode.Impulse
+        );
+
+        StartCoroutine(StunCoroutine());
+    }
+
+    private bool IsTrap(Collision collision)
+    {
+        Transform current = collision.collider.transform;
+
+        while (current != null)
+        {
+            if (current.CompareTag("Trap"))
+                return true;
+
+            current = current.parent;
+        }
+
+        return false;
     }
 
     IEnumerator StunCoroutine()
     {
         isStunned = true;
 
-        // Отключаем управление
-        movement.enabled = false;
+        if (movement != null)
+            movement.enabled = false;
 
-        // Анимация падения
-        anim.SetTrigger("Fall");
+        if (anim != null)
+            anim.SetTrigger("Fall");
 
-        // Лежим
         yield return new WaitForSeconds(stunDuration);
 
-        // Поднимаемся
-        anim.SetTrigger("GetUp");
+        if (anim != null)
+            anim.SetTrigger("GetUp");
 
-        // Ждем анимацию подъема
         yield return new WaitForSeconds(1f);
 
-        // Включаем управление обратно
-        movement.enabled = true;
+        if (movement != null)
+            movement.enabled = true;
 
         isStunned = false;
     }
