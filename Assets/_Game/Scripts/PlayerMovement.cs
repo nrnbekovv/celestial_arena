@@ -11,8 +11,12 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer;
     public float groundCheckRadius = 0.4f;
 
+    [Header("Audio")]
+    public AudioClip jumpSound;
+
     private Animator anim;
     private Rigidbody rb;
+    private AudioSource audioSource;
 
     private bool isGrounded;
     private bool wasGrounded;
@@ -26,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
 
+        audioSource = GetComponent<AudioSource>();
+
         rb.collisionDetectionMode =
             CollisionDetectionMode.Continuous;
     }
@@ -34,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isStunned)
             return;
+
         float moveH = Input.GetAxisRaw("Horizontal");
         float moveV = Input.GetAxisRaw("Vertical");
 
@@ -111,6 +118,11 @@ public class PlayerMovement : MonoBehaviour
             ForceMode.Impulse
         );
 
+        if (jumpSound != null)
+        {
+            audioSource.PlayOneShot(jumpSound);
+        }
+
         if (spinJump)
         {
             anim.SetTrigger("JumpSpin");
@@ -123,11 +135,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (
-            collision.gameObject.CompareTag("Ground") ||
-            collision.gameObject.CompareTag("Obstacle") ||
-            collision.gameObject.CompareTag("Trap")
-        )
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            jumpCount = 0;
+        }
+
+        if (collision.gameObject.CompareTag("Obstacle"))
         {
             jumpCount = 0;
         }
@@ -142,6 +155,7 @@ public class PlayerMovement : MonoBehaviour
             groundCheckRadius
         );
     }
+
     public void Stun(float duration)
     {
         if (isStunned)
