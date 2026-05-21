@@ -13,6 +13,12 @@ public class GameManager : MonoBehaviour
     public GameObject losePanel;
     public bool isFinalLevel = false;
 
+    [Header("Audio")]
+    public AudioClip winSound;
+    public AudioClip loseSound;
+
+    private AudioSource audioSource;
+
     [Header("Game Settings")]
     public int wavesToWin = 100;
     public string nextLevelName = "Level_02";
@@ -28,6 +34,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
         Time.timeScale = 1f;
 
         if (winPanel != null)
@@ -57,10 +65,14 @@ public class GameManager : MonoBehaviour
         if (gameEnded) return;
 
         gameEnded = true;
+
         SaveHighScore();
 
         if (losePanel != null)
             losePanel.SetActive(true);
+
+        if (loseSound != null)
+            audioSource.PlayOneShot(loseSound);
 
         Time.timeScale = 0f;
     }
@@ -70,10 +82,14 @@ public class GameManager : MonoBehaviour
         if (gameEnded) return;
 
         gameEnded = true;
+
         SaveHighScore();
 
         if (winPanel != null)
             winPanel.SetActive(true);
+
+        if (winSound != null)
+            audioSource.PlayOneShot(winSound);
 
         Time.timeScale = 0f;
     }

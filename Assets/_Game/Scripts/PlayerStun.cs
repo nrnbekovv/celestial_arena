@@ -8,6 +8,11 @@ public class PlayerStun : MonoBehaviour
     public float pushForce = 10f;
     public float upwardForce = 3f;
 
+    [Header("Audio")]
+    public AudioClip hitSound;
+
+    private AudioSource audioSource;
+
     private bool isStunned = false;
 
     private Rigidbody rb;
@@ -19,6 +24,8 @@ public class PlayerStun : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         movement = GetComponent<PlayerMovement>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -31,6 +38,11 @@ public class PlayerStun : MonoBehaviour
 
         Debug.Log("TRAP HIT");
 
+        if (hitSound != null)
+        {
+            audioSource.PlayOneShot(hitSound);
+        }
+
         Vector3 pushDirection = Vector3.zero;
 
         if (collision.contactCount > 0)
@@ -39,7 +51,9 @@ public class PlayerStun : MonoBehaviour
         }
         else
         {
-            pushDirection = (transform.position - collision.transform.position).normalized;
+            pushDirection =
+                (transform.position -
+                collision.transform.position).normalized;
         }
 
         pushDirection.y = 0;
@@ -48,7 +62,8 @@ public class PlayerStun : MonoBehaviour
         rb.linearVelocity = Vector3.zero;
 
         rb.AddForce(
-            pushDirection * pushForce + Vector3.up * upwardForce,
+            pushDirection * pushForce +
+            Vector3.up * upwardForce,
             ForceMode.Impulse
         );
 
@@ -57,7 +72,8 @@ public class PlayerStun : MonoBehaviour
 
     private bool IsTrap(Collision collision)
     {
-        Transform current = collision.collider.transform;
+        Transform current =
+            collision.collider.transform;
 
         while (current != null)
         {
