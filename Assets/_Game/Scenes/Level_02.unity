@@ -359,6 +359,8 @@ MonoBehaviour:
   winPanel: {fileID: 1380748614}
   losePanel: {fileID: 882822512}
   isFinalLevel: 1
+  winSound: {fileID: 8300000, guid: 2f4b86f5e60604753ad2be6b1f5c2171, type: 3}
+  loseSound: {fileID: 8300000, guid: e6bf36e1fd2d34292bad6a7f32e6aa4c, type: 3}
   wavesToWin: 10
   nextLevelName: Level_02
   waveSpeed: 7
@@ -609,6 +611,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 72
   groundCheckRadius: 0.1
+  jumpSound: {fileID: 0}
 --- !u!114 &353677167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -624,6 +627,7 @@ MonoBehaviour:
   stunDuration: 1.5
   pushForce: 5
   upwardForce: 3
+  hitSound: {fileID: 0}
 --- !u!1 &354100089
 GameObject:
   m_ObjectHideFlags: 0
