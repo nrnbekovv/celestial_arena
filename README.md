@@ -31,7 +31,8 @@ In **Celestial Arena**, the player's goal is to survive waves of incoming blocks
 <img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/c05a9dfe-68c6-4621-a1cf-38db046dfc72" />
 <img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/e8b572e0-50fc-424c-b6a2-612a871cd10e" />
 <img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/11e086a1-2f8c-4dd7-b454-51e7e4768736" />
-
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/e62cf720-6ea2-44d4-819e-8c4970985ca4" />
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/132de096-e608-4c16-8f28-419610c837e8" />
 
 
 ## How to Run Locally
